@@ -30,7 +30,11 @@ export default function Verify() {
         // Simulate network delay for effect
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        const response = await axios.get<VerifyResponse>(`${apiUrl}/api/verify/${documentId}`);
+        const response = await axios.get<VerifyResponse>(`${apiUrl}/api/verify/${documentId}`, {
+          headers: {
+            'ngrok-skip-browser-warning': 'true'
+          }
+        });
         setResult(response.data);
       } catch (error: any) {
         if (error.response && error.response.data) {
