@@ -5,11 +5,16 @@ import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, Loader2, ShieldCheck, AlertOctagon } from 'lucide-react';
 
 interface DocumentData {
-  student_name: string;
-  cne: string;
   document_type: string;
   issue_date: string;
-  moyenne: string;
+  student_name?: string;
+  cne?: string;
+  filiere?: string;
+  groupe?: string;
+  moyenne?: string;
+  professor_name?: string;
+  specialite?: string;
+  grade?: string;
 }
 
 interface VerifyResponse {
@@ -99,28 +104,58 @@ export default function Verify() {
             
             <div className="p-8 space-y-5">
               <div className="space-y-4">
-                <div>
-                  <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Étudiant(e)</p>
-                  <p className="text-lg font-medium text-emerald-50">{result.data.student_name}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">CNE</p>
-                    <p className="text-emerald-100">{result.data.cne}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Date d'édition</p>
-                    <p className="text-emerald-100">{result.data.issue_date}</p>
-                  </div>
-                </div>
+                {result.data.student_name && (
+                  <>
+                    <div>
+                      <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Étudiant(e)</p>
+                      <p className="text-lg font-medium text-emerald-50">{result.data.student_name}</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">CNE</p>
+                        <p className="text-emerald-100">{result.data.cne}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Date d'édition</p>
+                        <p className="text-emerald-100">{result.data.issue_date}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {result.data.professor_name && (
+                  <>
+                    <div>
+                      <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Professeur(e)</p>
+                      <p className="text-lg font-medium text-emerald-50">{result.data.professor_name}</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Grade</p>
+                        <p className="text-emerald-100">{result.data.grade}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Date d'édition</p>
+                        <p className="text-emerald-100">{result.data.issue_date}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
                 <div>
                   <p className="text-xs text-emerald-300/60 uppercase tracking-wider font-semibold mb-1">Type de Document</p>
                   <p className="text-emerald-100">{result.data.document_type}</p>
                 </div>
-                <div className="bg-emerald-900/40 rounded-xl p-4 border border-emerald-500/20 flex justify-between items-center mt-2">
-                  <span className="text-emerald-200/80 font-medium">Moyenne validée</span>
-                  <span className="text-xl font-bold text-emerald-300">{result.data.moyenne}</span>
-                </div>
+                {result.data.specialite && (
+                  <div className="bg-emerald-900/40 rounded-xl p-4 border border-emerald-500/20 flex justify-between items-center mt-2">
+                    <span className="text-emerald-200/80 font-medium">Spécialité</span>
+                    <span className="text-lg font-bold text-emerald-300">{result.data.specialite}</span>
+                  </div>
+                )}
+                {result.data.student_name && (
+                  <div className="bg-emerald-900/40 rounded-xl p-4 border border-emerald-500/20 flex justify-between items-center mt-2">
+                    <span className="text-emerald-200/80 font-medium">Moyenne validée</span>
+                    <span className="text-xl font-bold text-emerald-300">{result.data.moyenne}</span>
+                  </div>
+                )}
               </div>
             </div>
 
